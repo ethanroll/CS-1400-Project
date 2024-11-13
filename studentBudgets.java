@@ -2,6 +2,20 @@ import java.util.Scanner;
 
 public class RestaurantCheckManager {
 	
+	public static double getAmount(Scanner scnr) {
+		String inputLine;
+		inputLine = scnr.nextLine();
+		if (inputLine.isBlank())
+			return 0;
+		try {
+			return Double.valueOf(inputLine);
+		}
+		catch (NumberFormatException e) { //if the input cannot be converted to a double
+			System.out.println("Input must be a number");
+			return getAmount(scnr);
+		}
+	}
+	
 	public static void main(String[] args) {
 		Scanner scnr = new Scanner(System.in);
 		boolean quit = false;
@@ -15,11 +29,11 @@ public class RestaurantCheckManager {
 		
 		while (!quit) {
 			System.out.println("Total sale amount:");
-			saleAmount = scnr.nextDouble();
+			saleAmount = getAmount(scnr);
 			System.out.println("Tip amount:");
-			tipAmount = scnr.nextDouble();
+			tipAmount = getAmount(scnr);
 			System.out.println("Total amount:");
-			totalAmount = scnr.nextDouble();
+			totalAmount = getAmount(scnr);
 			
 			//accounting for edge cases
 			if (totalAmount < saleAmount)
@@ -43,5 +57,9 @@ public class RestaurantCheckManager {
 		scnr.close();
 		System.out.println("The total sale amount is: " + totalSaleAmount);
 		System.out.println("The total pooled tip amount is: " + totalTipAmount);
+	}
+	
+	public static void printTipSplits(double totalTipAmount) {
+		//FIXME: add something
 	}
 }
