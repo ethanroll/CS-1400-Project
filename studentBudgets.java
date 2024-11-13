@@ -21,12 +21,34 @@ public class RestaurantCheckManager {
 		double saleAmount;
 		double tipAmount;
 		double totalAmount;
-		double totalSaleAmount;
-		double totalTipAmount;
-		int numberOfChecks;
+		double totalSaleAmount = 0;
+		double totalTipAmount = 0;
+		int numberOfChecks = 0;
 		
 		while (true) {
-			System.out.println("Please enter the sale amount");
+			System.out.println("Total sale amount:");
+			saleAmount = scnr.nextDouble();
+			System.out.println("Tip amount:");
+			tipAmount = scnr.nextDouble();
+			System.out.println("Total amount:");
+			totalAmount = scnr.nextDouble();
+			//FIXME: should also account for InputMismatchException
+			
+			//accounting for edge cases
+			if (totalAmount < saleAmount)
+				totalAmount = saleAmount;
+			if (saleAmount + tipAmount != totalAmount)
+				tipAmount = totalAmount - saleAmount;
+			
+			totalSaleAmount += saleAmount;
+			totalTipAmount += tipAmount;
+			numberOfChecks++;
+			
+			System.out.println("Check count: " + numberOfChecks);
+			System.out.println("Total sale so far: " + totalSaleAmount);
+			System.out.println("Total pooled tip so far: " + totalTipAmount);
+			
+			//FIXME: add quit function + final amounts
 			
 		}
 	}
