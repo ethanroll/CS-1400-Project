@@ -75,20 +75,25 @@ public class RestaurantCheckManager {
 		final double PERCENT_CHEF = 0.04;
 		final double PERCENT_SOUS_CHEF = 0.03;
 		final double PERCENT_KITCHEN_AID = 0.03;
-		//for the sake of simplicity, host/hostess has been simplified to just host
 		final double PERCENT_HOST = 0.10; 
+		//for the sake of simplicity, host/hostess has been simplified to just host
 		final double PERCENT_BUSSER = 0.10;
 		
 		double tipPerServer = totalTipAmount * PERCENT_SERVER / NUM_SERVERS;
 		System.out.printf("$%.2f goes to each server\n", tipPerServer);
+		
 		double tipChef = totalTipAmount * PERCENT_CHEF;
 		System.out.printf("$%.2f goes to the chef\n", tipChef);
+		
 		double tipSousChef = totalTipAmount * PERCENT_SOUS_CHEF;
 		System.out.printf("$%.2f goes to the sous-chef\n", tipSousChef);
+		
 		double tipKitchenAid = totalTipAmount * PERCENT_KITCHEN_AID;
 		System.out.printf("$%.2f goes to the kitchen aid\n", tipKitchenAid);
+		
 		double tipHost = totalTipAmount * PERCENT_HOST;
 		System.out.printf("$%.2f goes to the host/hostess\n", tipHost);
+		
 		double tipBusser = totalTipAmount * PERCENT_BUSSER;
 		System.out.printf("$%.2f goes to the busser\n", tipBusser);
 	}
