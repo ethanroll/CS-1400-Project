@@ -16,7 +16,7 @@ public class RestaurantCheckManager {
 		}
 	}
 	
-	public static boolean ifQuitting(Scanner scnr) {
+	public static boolean isQuitting(Scanner scnr) {
 		String quitPrompt = scnr.next();
 		scnr.nextLine(); //clears newline character
 		if (quitPrompt.equalsIgnoreCase("y"))
@@ -24,7 +24,7 @@ public class RestaurantCheckManager {
 		if (quitPrompt.equalsIgnoreCase("n"))
 			return false;
 		System.out.println("Input must be \"y\" or \"n\"");
-		return ifQuitting(scnr); //allows user to try again
+		return isQuitting(scnr); //allows user to try again
 	}
 	
 	public static void main(String[] args) {
@@ -60,7 +60,7 @@ public class RestaurantCheckManager {
 			System.out.println("Total pooled tip so far: " + totalTipAmount);
 			
 			System.out.println("Do you want to stop (y,n):");
-			quit = ifQuitting(scnr);	
+			quit = isQuitting(scnr);	
 		}
 		scnr.close();
 		System.out.printf("The total sale amount is: $%.2f\n", totalSaleAmount);
