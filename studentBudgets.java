@@ -1,23 +1,11 @@
 import java.util.Scanner;
 
 public class RestaurantCheckManager {
-	/**
-	 * Start by creating a class called RestaurantCheckManager
-	 * Write a loop that keeps running until the manager the manager asks to terminate
-	 * Inside the loop, prompt the manager to enter the sale amount
-	 * Then prompt the manager to enter the tip amount
-	 * Finally, prompt the manager to enter the total amount
-	 * Calculate the total sale amount, the total tip amount, and the number of checks
-	 * Pay attention to the edge cases listed above
-	 * Ask the manager if they want to stop
-	 * If they type ‘y’ or ‘Y’, terminate the loop
-	 * Else continue
-	 * After that the program should display the total sale amount and the total tip amount
-	 */
 	
 	public static void main(String[] args) {
 		Scanner scnr = new Scanner(System.in);
 		boolean quit = false;
+		String quitPrompt;
 		double saleAmount;
 		double tipAmount;
 		double totalAmount;
@@ -25,14 +13,13 @@ public class RestaurantCheckManager {
 		double totalTipAmount = 0;
 		int numberOfChecks = 0;
 		
-		while (true) {
+		while (!quit) {
 			System.out.println("Total sale amount:");
 			saleAmount = scnr.nextDouble();
 			System.out.println("Tip amount:");
 			tipAmount = scnr.nextDouble();
 			System.out.println("Total amount:");
 			totalAmount = scnr.nextDouble();
-			//FIXME: should also account for InputMismatchException
 			
 			//accounting for edge cases
 			if (totalAmount < saleAmount)
@@ -48,8 +35,13 @@ public class RestaurantCheckManager {
 			System.out.println("Total sale so far: " + totalSaleAmount);
 			System.out.println("Total pooled tip so far: " + totalTipAmount);
 			
-			//FIXME: add quit function + final amounts
-			
+			System.out.println("Do you want to stop (y,n):");
+			quitPrompt = scnr.next();
+			if (quitPrompt.equals("y"))
+				quit = true;
 		}
+		scnr.close();
+		System.out.println("The total sale amount is: " + totalSaleAmount);
+		System.out.println("The total pooled tip amount is: " + totalTipAmount);
 	}
 }
