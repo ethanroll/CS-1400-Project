@@ -3,10 +3,13 @@ import java.util.Scanner;
 public class RestaurantCheckManager {
 	
 	public static double getAmount(Scanner scnr) {
-		String inputLine;
-		inputLine = scnr.nextLine();
+		String inputLine = scnr.nextLine();
 		if (inputLine.isBlank())
 			return 0;
+		if (inputLine.contains("-")) {
+			System.out.println("Input must be positive");
+			return getAmount(scnr);
+		}
 		try {
 			return Double.valueOf(inputLine);
 		}
@@ -15,6 +18,7 @@ public class RestaurantCheckManager {
 			return getAmount(scnr); //allows user to try again
 		}
 	}
+	
 	
 	public static boolean isQuitting(Scanner scnr) {
 		String quitPrompt = scnr.next();
@@ -56,8 +60,8 @@ public class RestaurantCheckManager {
 			numberOfChecks++;
 			
 			System.out.println("Check count: " + numberOfChecks);
-			System.out.println("Total sale so far: " + totalSaleAmount);
-			System.out.println("Total pooled tip so far: " + totalTipAmount);
+			System.out.printf("Total sale so far: $%.2f\n", totalSaleAmount);
+			System.out.printf("Total pooled tip so far: $%.2f\n", totalTipAmount);
 			
 			System.out.println("Do you want to stop (y,n):");
 			quit = isQuitting(scnr);	
