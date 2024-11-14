@@ -1,24 +1,26 @@
+package SRC_7;
 import java.util.Scanner;
 
 public class RestaurantCheckManager {
 	
 	public static double getAmount(Scanner scnr) {
 		String inputLine = scnr.nextLine();
+			//nextDouble would not allow the user to put a blank input
+			//so nextLine must be used rather than nextDouble
 		if (inputLine.isBlank())
 			return 0;
-		if (inputLine.contains("-")) {
+		try {
+			double amount = Double.parseDouble(inputLine);
+			if (amount >= 0)
+				return amount;
 			System.out.println("Input must be positive");
 			return getAmount(scnr);
 		}
-		try {
-			return Double.valueOf(inputLine);
-		}
-		catch (NumberFormatException e) { //if the input cannot be converted to a double
+		catch (NumberFormatException e) { //if the input cannot be converted to a double on line 13
 			System.out.println("Input must be a number");
 			return getAmount(scnr); //allows user to try again
 		}
 	}
-	
 	
 	public static boolean isQuitting(Scanner scnr) {
 		String quitPrompt = scnr.next();
@@ -43,17 +45,18 @@ public class RestaurantCheckManager {
 		
 		while (!quit) {
 			System.out.println("Total sale amount:");
-			saleAmount = getAmount(scnr);
+			saleAmount = getAmount(scnr); //line 6
 			System.out.println("Tip amount:");
 			tipAmount = getAmount(scnr);
 			System.out.println("Total amount:");
 			totalAmount = getAmount(scnr);
 			
 			//accounting for edge cases
-			if (totalAmount < saleAmount)
+			if (totalAmount < saleAmount) 
 				totalAmount = saleAmount;
 			if (saleAmount + tipAmount != totalAmount)
 				tipAmount = totalAmount - saleAmount;
+			//note that tipAmount is not changed to 0 in the first case because that would be handled by the second anyway
 			
 			totalSaleAmount += saleAmount;
 			totalTipAmount += tipAmount;
@@ -62,9 +65,10 @@ public class RestaurantCheckManager {
 			System.out.println("Check count: " + numberOfChecks);
 			System.out.printf("Total sale so far: $%.2f\n", totalSaleAmount);
 			System.out.printf("Total pooled tip so far: $%.2f\n", totalTipAmount);
+			//%.2f is used to ensure that only 2 decimal places are displayed as to make sense as cents
 			
 			System.out.println("Do you want to stop (y,n):");
-			quit = isQuitting(scnr);	
+			quit = isQuitting(scnr); //line 25
 		}
 		scnr.close();
 		System.out.printf("The total sale amount is: $%.2f\n", totalSaleAmount);
@@ -80,7 +84,7 @@ public class RestaurantCheckManager {
 		final double PERCENT_SOUS_CHEF = 0.03;
 		final double PERCENT_KITCHEN_AID = 0.03;
 		final double PERCENT_HOST = 0.10; 
-		//for the sake of simplicity, host/hostess has been simplified to just host
+		//for the sake of simplicity, host/hostess has been shortened to just host
 		final double PERCENT_BUSSER = 0.10;
 		
 		double tipPerServer = totalTipAmount * PERCENT_SERVER / NUM_SERVERS;
