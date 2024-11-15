@@ -7,19 +7,32 @@ public class RestaurantCheckManager {
 		String inputLine = scnr.nextLine();
 			//nextDouble would not allow the user to put a blank input
 			//so nextLine must be used rather than nextDouble
+		
+		//accounting for edge cases
 		if (inputLine.isBlank())
 			return 0;
 		try {
-			double amount = Double.parseDouble(inputLine);
-			if (amount >= 0)
+			double amount = Double.parseDouble(inputLine); //line that can cause error
+			if (amount >= 0 && isCents(amount) && amount < Integer.MAX_VALUE)
 				return amount;
-			System.out.println("Input must be positive");
-			return getAmount(scnr);
+			//integer minimum is not considered because amount is assumed to be positive by that point
+			else if (amount < 0)
+				System.out.println("Input must be positive");
+			else if (!isCents(amount))
+				System.out.println("Input does not make sense as cents");
+			else if (amount > Integer.MAX_VALUE)
+				System.out.println("Input is too large");
+			return getAmount(scnr); //occurs after any else if statement
 		}
-		catch (NumberFormatException e) { //if the input cannot be converted to a double on line 13
+		catch (NumberFormatException e) {
 			System.out.println("Input must be a number");
 			return getAmount(scnr); //allows user to try again
 		}
+	}
+	
+	public static boolean isCents(double amount) {
+		return ((amount * 100) % 1 <= 1) ? true : false;
+		//since doubles are not precise, a small margin of error has been provided
 	}
 	
 	public static boolean isQuitting(Scanner scnr) {
@@ -45,7 +58,7 @@ public class RestaurantCheckManager {
 		
 		while (!quit) {
 			System.out.println("Total sale amount:");
-			saleAmount = getAmount(scnr); //line 6
+			saleAmount = getAmount(scnr);
 			System.out.println("Tip amount:");
 			tipAmount = getAmount(scnr);
 			System.out.println("Total amount:");
@@ -68,7 +81,7 @@ public class RestaurantCheckManager {
 			//%.2f is used to ensure that only 2 decimal places are displayed as to make sense as cents
 			
 			System.out.println("Do you want to stop (y,n):");
-			quit = isQuitting(scnr); //line 25
+			quit = isQuitting(scnr);
 		}
 		scnr.close();
 		System.out.printf("The total sale amount is: $%.2f\n", totalSaleAmount);
