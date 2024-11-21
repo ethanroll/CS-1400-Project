@@ -91,11 +91,11 @@ public class RestaurantCheckManager {
 	}
 	
 	public static void printTipSplits(double totalTipAmount) {
-		final double PERCENT_SERVER = 0.70;
+		final double PERCENT_SERVER = 0.60;
 		final int NUM_SERVERS = 3;
-		final double PERCENT_CHEF = 0.04;
-		final double PERCENT_SOUS_CHEF = 0.03;
-		final double PERCENT_KITCHEN_AID = 0.03;
+		final double PERCENT_CHEF = 0.08;
+		final double PERCENT_SOUS_CHEF = 0.06;
+		final double PERCENT_KITCHEN_AID = 0.06;
 		final double PERCENT_HOST = 0.10; 
 		//for the sake of simplicity, host/hostess has been shortened to just host
 		final double PERCENT_BUSSER = 0.10;
