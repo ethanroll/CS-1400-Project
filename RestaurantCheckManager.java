@@ -31,7 +31,7 @@ public class RestaurantCheckManager {
 	}
 	
 	public static boolean isCents(double amount) {
-		return ((amount * 100) % 1 <= 1) ? true : false;
+		return (amount * 100) % 1 >= 0.9999 || (amount * 100) % 1 <= 0.0001;
 		//since doubles are not precise, a small margin of error has been provided
 	}
 	
