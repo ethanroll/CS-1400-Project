@@ -2,9 +2,14 @@ package SRC_7;
 import java.util.Scanner;
 
 public class RestaurantCheckManager {
+
+	static String inputLine;
+	static double amount;
+	static String quitPrompt;
+	//declared outside of recursive functions to (hopefully) avoid stack overflow
 	
 	public static double getAmount(Scanner scnr) {
-		String inputLine = scnr.nextLine();
+		inputLine = scnr.nextLine();
 			//nextDouble would not allow the user to put a blank input
 			//so nextLine must be used rather than nextDouble
 		
@@ -12,7 +17,7 @@ public class RestaurantCheckManager {
 		if (inputLine.isBlank())
 			return 0;
 		try {
-			double amount = Double.parseDouble(inputLine); //line that can cause error
+			amount = Double.parseDouble(inputLine); //line that can cause error
 			if (amount >= 0 && isCents(amount) && amount < Integer.MAX_VALUE)
 				return amount;
 			//integer minimum is not considered because amount is assumed to be positive by that point
@@ -36,7 +41,7 @@ public class RestaurantCheckManager {
 	}
 	
 	public static boolean isQuitting(Scanner scnr) {
-		String quitPrompt = scnr.next();
+		quitPrompt = scnr.next();
 		scnr.nextLine(); //clears newline character
 		if (quitPrompt.equalsIgnoreCase("y"))
 			return true;
