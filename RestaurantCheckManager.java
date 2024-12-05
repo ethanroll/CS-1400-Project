@@ -83,65 +83,56 @@ public class RestaurantCheckManager {
 			System.out.println("Do you want to stop (y,n):");
 			quit = isQuitting(scnr);
 		}
-		scnr.close();
+		
 		System.out.printf("The total sale amount is: $%.2f\n", totalSaleAmount);
 		System.out.printf("The total pooled tip amount is: $%.2f\n", totalTipAmount);
 		System.out.println();
-		printTipSplits(totalTipAmount);
+		printTipSplits(totalTipAmount, scnr);
+		scnr.close();
 	}
 	
-	public static void printTipSplits(double totalTipAmount) {
+	public static void printTipSplits(double totalTipAmount, Scanner scnr) {
 		final double PERCENT_SERVER = 0.60;
-		//final int NUM_SERVERS = 3;
 		final double PERCENT_CHEF = 0.08;
 		final double PERCENT_SOUS_CHEF = 0.06;
 		final double PERCENT_KITCHEN_AID = 0.06;
 		final double PERCENT_HOST = 0.10; //for the sake of simplicity, host/hostess has been shortened to just host
 		final double PERCENT_BUSSER = 0.10;
-
-		Scanner scnr = new Scanner(System.in);
 		
 		System.out.println("How many servers are there?");
-		final int numServers = scnr.nextInt();
+		int numServers = scnr.nextInt();
 
 		System.out.println("How many chefs are there?");
-		final int numChefs = scnr.nextInt();
+		int numChefs = scnr.nextInt();
 
 		System.out.println("How many sous-chefs are there?");
-		final int numSousChefs = scnr.nextInt();
+		int numSousChefs = scnr.nextInt();
 
 		System.out.println("How many kitchen aides are there?");
-		final int numKitchenAides = scnr.nextInt();
+		int numKitchenAides = scnr.nextInt();
 
 		System.out.println("How many host/hostesses are there?");
-		final int numHost = scnr.nextInt();
+		int numHost = scnr.nextInt();
 
 		System.out.println("How many bussers are there");
-		final int numBusser = scnr.nextInt();
+		int numBusser = scnr.nextInt();
 
-		
-			//double tipPerServer = totalTipAmount * PERCENT_SERVER / NUM_SERVERS;
-			double tipPerServer = totalTipAmount * PERCENT_SERVER / numServers;
-			System.out.printf("$%.2f goes to each server\n", tipPerServer);
-		
-			//double tipChef = totalTipAmount * PERCENT_CHEF;
-			double tipChef = totalTipAmount * PERCENT_CHEF / numChefs;
-			System.out.printf("$%.2f goes to the chef\n", tipChef);
-		
-			//double tipSousChef = totalTipAmount * PERCENT_SOUS_CHEF;
-			double tipSousChef = totalTipAmount * PERCENT_SOUS_CHEF / numSousChefs;
-			System.out.printf("$%.2f goes to the sous-chef\n", tipSousChef);
-		
-			//double tipKitchenAid = totalTipAmount * PERCENT_KITCHEN_AID;
-			double tipKitchenAid = totalTipAmount * PERCENT_KITCHEN_AID / numKitchenAides;
-			System.out.printf("$%.2f goes to the kitchen aid\n", tipKitchenAid);
+		double tipPerServer = totalTipAmount * PERCENT_SERVER / numServers;
+		System.out.printf("$%.2f goes to each server\n", tipPerServer);
+	
+		double tipChef = totalTipAmount * PERCENT_CHEF / numChefs;
+		System.out.printf("$%.2f goes to each chef\n", tipChef);
+	
+		double tipSousChef = totalTipAmount * PERCENT_SOUS_CHEF / numSousChefs;
+		System.out.printf("$%.2f goes to each sous-chef\n", tipSousChef);
+	
+		double tipKitchenAid = totalTipAmount * PERCENT_KITCHEN_AID / numKitchenAides;
+		System.out.printf("$%.2f goes to each kitchen aid\n", tipKitchenAid);
 
-			//double tipHost = totalTipAmount * PERCENT_HOST;
-			double tipHost = totalTipAmount * PERCENT_HOST / numHost;
-			System.out.printf("$%.2f goes to the host/hostess\n", tipHost);
-		
-			//double tipBusser = totalTipAmount * PERCENT_BUSSER;
-			double tipBusser = totalTipAmount * PERCENT_BUSSER / numBusser;
-			System.out.printf("$%.2f goes to the busser\n", tipBusser);
+		double tipHost = totalTipAmount * PERCENT_HOST / numHost;
+		System.out.printf("$%.2f goes to each host/hostess\n", tipHost);
+	
+		double tipBusser = totalTipAmount * PERCENT_BUSSER / numBusser;
+		System.out.printf("$%.2f goes to each busser\n", tipBusser);
 	}
 }
