@@ -1,3 +1,4 @@
+package SRC_7;
 import java.util.Scanner;
 
 public class RestaurantCheckManager {
@@ -46,15 +47,18 @@ public class RestaurantCheckManager {
 			//so nextLine must be used rather than nextInt
 		
 		//accounting for edge cases
-		if (inputLine.isBlank())
-			return 0;
+		if (inputLine.isBlank()) {
+			System.out.println("Input must be above 0");
+			getNumWorkers(scnr);
+		}
 		try {
 			numWorkers = Integer.parseInt(inputLine); //line that can cause error
-			if (numWorkers >= 0 && numWorkers < Integer.MAX_VALUE)
+			if (numWorkers > 0 && numWorkers < Integer.MAX_VALUE)
 				return numWorkers;
 			//integer minimum is not considered because amount is assumed to be positive by that point
-			else if (numWorkers < 0)
-				System.out.println("Input must be positive");
+			//zero is also not allowed because that would cause a divide by 0 error
+			else if (numWorkers <= 0)
+				System.out.println("Input must be above 0");
 			else if (numWorkers > Integer.MAX_VALUE)
 				System.out.println("Input is too large");
 			return getNumWorkers(scnr); //occurs after any else if statement
