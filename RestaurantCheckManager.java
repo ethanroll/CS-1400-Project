@@ -1,10 +1,10 @@
-package SRC_7;
 import java.util.Scanner;
 
 public class RestaurantCheckManager {
 
 	static String inputLine;
 	static double amount;
+	static int numWorkers;
 	static String quitPrompt;
 	//declared outside of recursive functions to (hopefully) avoid stack overflow
 	
@@ -38,6 +38,31 @@ public class RestaurantCheckManager {
 	public static boolean isCents(double amount) {
 		return (amount * 100) % 1 >= 0.9999 || (amount * 100) % 1 <= 0.0001;
 		//since doubles are not precise, a small margin of error has been provided
+	}
+	
+	public static int getNumWorkers(Scanner scnr) {
+		inputLine = scnr.nextLine();
+			//nextInt would not allow the user to put a blank input
+			//so nextLine must be used rather than nextInt
+		
+		//accounting for edge cases
+		if (inputLine.isBlank())
+			return 0;
+		try {
+			numWorkers = Integer.parseInt(inputLine); //line that can cause error
+			if (numWorkers >= 0 && numWorkers < Integer.MAX_VALUE)
+				return numWorkers;
+			//integer minimum is not considered because amount is assumed to be positive by that point
+			else if (numWorkers < 0)
+				System.out.println("Input must be positive");
+			else if (numWorkers > Integer.MAX_VALUE)
+				System.out.println("Input is too large");
+			return getNumWorkers(scnr); //occurs after any else if statement
+		}
+		catch (NumberFormatException e) {
+			System.out.println("Input must be a number");
+			return getNumWorkers(scnr); //allows user to try again
+		}
 	}
 	
 	public static boolean isQuitting(Scanner scnr) {
@@ -105,25 +130,27 @@ public class RestaurantCheckManager {
 		final double PERCENT_BUSSER = 0.10;
 		
 		System.out.println("How many servers are there?");
-		int numServers = scnr.nextInt();
+		int numServers = getNumWorkers(scnr);
 
 		System.out.println("How many chefs are there?");
-		int numChefs = scnr.nextInt();
+		int numChefs = getNumWorkers(scnr);
 
 		System.out.println("How many sous-chefs are there?");
-		int numSousChefs = scnr.nextInt();
+		int numSousChefs = getNumWorkers(scnr);
 
-		System.out.println("How many kitchen aides are there?");
-		int numKitchenAides = scnr.nextInt();
+		System.out.println("How many kitchen aids are there?");
+		int numKitchenAides = getNumWorkers(scnr);
 
-		System.out.println("How many host/hostesses are there?");
-		int numHost = scnr.nextInt();
+		System.out.println("How many hosts/hostesses are there?");
+		int numHost = getNumWorkers(scnr);
 
 		System.out.println("How many bussers are there");
-		int numBusser = scnr.nextInt();
+		int numBusser = getNumWorkers(scnr);
+		
+		System.out.println();
 
-		double tipPerServer = totalTipAmount * PERCENT_SERVER / numServers;
-		System.out.printf("$%.2f goes to each server\n", tipPerServer);
+		double tipServer = totalTipAmount * PERCENT_SERVER / numServers;
+		System.out.printf("$%.2f goes to each server\n", tipServer);
 	
 		double tipChef = totalTipAmount * PERCENT_CHEF / numChefs;
 		System.out.printf("$%.2f goes to each chef\n", tipChef);
