@@ -10,8 +10,8 @@ The purpose of this program is fairly distribute collected tips amongst the empl
 - The total sale and tip amounts up to that check are calculated and the number of checks is incremented
 - If the user chooses to continue, they will continue inputting checks
 - Once the user chooses to stop, they are then promted to input the number of employees in each position
-  - If the input is blank, it is considered to be 0
-  - Inputs that are negative, exceed the integer limit, or are not numeric are discarded and the user is asked to try again
+  - If the input is blank, it is considered to be 0 and is rejected
+  - Inputs that are non-positive, exceed the integer limit, or are not numeric are discarded and the user is asked to try again
 - Once the user is done, the tip distribution is calculated and printed using the total tip amount
   - 60% to the servers with 3 servers present
   - 20% to the kitchen
