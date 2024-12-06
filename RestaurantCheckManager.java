@@ -1,4 +1,3 @@
-package SRC_7;
 import java.util.Scanner;
 
 public class RestaurantCheckManager {
@@ -148,7 +147,7 @@ public class RestaurantCheckManager {
 		System.out.println("How many hosts/hostesses are there?");
 		int numHost = getNumWorkers(scnr);
 
-		System.out.println("How many bussers are there");
+		System.out.println("How many bussers are there?");
 		int numBusser = getNumWorkers(scnr);
 		
 		System.out.println();
